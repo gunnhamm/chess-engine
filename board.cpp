@@ -38,10 +38,10 @@ void Board::flip() {
         }
     }
 }
-vector<Move> Board::gen_moves() {
+shared_ptr<vector<Move>> Board::gen_moves(int row, int col) {
     shared_ptr<vector<Move>> moves(new vector<Move>());
-    for (int i = board_start; i < board_end; ++i) {
-        for (int j = board_start; j < board_end; ++j) {
+    for (int i = row; i < board_end; ++i) {
+        for (int j = col; j < board_end; ++j) {
             if (colors[i][j] == white) {
                 switch (pieces[i][j]) {
                     case pawn:
@@ -64,6 +64,7 @@ vector<Move> Board::gen_moves() {
 
                 }
             }
+            return moves;
         }
     }
 }

@@ -18,12 +18,11 @@ const int king = 9;
 const int board_start = 2;
 const int board_end = 10;
 
-
 class Board {
     public:
-        std::vector<Move> gen_moves();
+        shared_ptr<std::vector<Move>> gen_moves(int row, int col);
         inline void pawn_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
-        inline void rook_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col));
+        inline void rook_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
         inline void knight_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
         inline void bishop_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
         inline void queen_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
