@@ -1,8 +1,8 @@
 #include "board.hpp"
-#include <iostream>
+using namespace std;
 void Board::print_board() {
-    for (int i = 2; i < 10; ++i) {
-        for (int j = 2; j < 10; ++j) {
+    for (int i = board_start; i < board_end; ++i) {
+        for (int j = board_start; j < board_end; ++j) {
             char piece = '-';
             switch (pieces[i][j]) {
                 case pawn:
@@ -26,40 +26,50 @@ void Board::print_board() {
             if (piece != '-' && colors[i][j] == white) {
                 piece -= 32;
             }
-            std::cout << piece << ' ';
+            cout << piece << ' ';
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 }
-std::vector<Move> Board::gen_moves() {
-    
-    for (int i = 2; i < 10; ++i) {
-        for (int j = 2; j < 10; ++j) {
+void Board::flip() {
+    for (int i = board_start; i < board_end; ++i) {
+        for (int j = board_start; j < board_end; ++j) {
+            colors[i][j] *= -1;
+        }
+    }
+}
+vector<Move> Board::gen_moves() {
+    shared_ptr<vector<Move>> moves(new vector<Move>());
+    for (int i = board_start; i < board_end; ++i) {
+        for (int j = board_start; j < board_end; ++j) {
             if (colors[i][j] == white) {
                 switch (pieces[i][j]) {
                     case pawn:
-                        piece = 'p';
+                        pawn_moves(moves, i, j);
                         break;
                     case rook:
-                        piece = 'r';
+                        rook_moves(moves, i, j);
                         break;
                     case knight:
-                        piece = 'n';
+                        knight_moves(moves, i, j);
                         break;
                     case bishop:
-                        piece = 'b';
+                        bishop_moves(moves, i, j);
                         break;
                     case queen:
-                        piece = 'q';
+                        queen_moves(moves, i, j);
                         break;
                     case king:
-                        piece = 'k';
+                        king_moves(moves, i, j);
+
                 }
             }
         }
     }
 }
-
+inline void bishop_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col) {
+    
+}
 int main() {
     Board b;
     b.print_board();
