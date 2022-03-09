@@ -22,7 +22,6 @@ const int board_end = 10;
 
 class Board {
     public:
-        std::shared_ptr<std::vector<Move>> gen_moves(int row, int col);
         inline void pawn_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
         inline void rook_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
         inline void knight_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
@@ -76,4 +75,13 @@ class Move {
     private:
         short encoding;
 };
+struct Moveset {
+    int num_moves;
+    int x_moves[];
+    int y_moves[];
+}
+
+
+
+
 #endif
