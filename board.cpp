@@ -68,9 +68,39 @@ shared_ptr<vector<Move>> Board::gen_moves(int row, int col) {
         }
     }
 }
-inline void bishop_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col) {
-    
+inline void Board::bishop_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col) {
+    int x_moves[] = {1, 1, -1, -1};
+    int y_moves[] = {1, -1, 1, -1};
+    int x_distance, y_distance;
+
+    for (int i = 0; i < 4; i++) {
+        x_distance = x_moves[i];
+        y_distance = y_moves[i];
+        while (colors[row + y_distance][col + x_distance] != null && colors[row + y_distance][col + x_distance] != white) {
+            move_list->push_back(Move(row, col, row + y_distance, col + x_distance));
+            if (pieces[row + y_distance][col + x_distance] == black) {
+                break;
+            }
+        }
+    }
+
 }
+int Move::end_col() {
+    return (encoding & 0x0007);
+}
+int Move::end_row() {
+    return (encoding & 0x0038) >> 3;
+}
+int Move::start_col() {
+    return (encoding & 0x01c0) >> 6;
+}
+int Move::start_row() {
+    return (encoding & 0x0e00) >> 9;
+}
+Move::Move(int start_row, int start_col, int end_row, int end_col) {
+    encoding = 0 | start_row << 9 | start_col << 6 | end_row << 3 | end_col;
+}
+
 int main() {
     Board b;
     b.print_board();

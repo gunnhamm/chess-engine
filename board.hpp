@@ -1,4 +1,6 @@
-#include "move.hpp"
+#ifndef BOARD_H
+#define BOARD_H
+
 #include <vector>
 #include <memory>
 #include <iostream>
@@ -20,7 +22,7 @@ const int board_end = 10;
 
 class Board {
     public:
-        shared_ptr<std::vector<Move>> gen_moves(int row, int col);
+        std::shared_ptr<std::vector<Move>> gen_moves(int row, int col);
         inline void pawn_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
         inline void rook_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
         inline void knight_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
@@ -62,3 +64,16 @@ class Board {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 };
+
+class Move {
+    public:
+        Move(int start_row, int start_col, int end_row, int end_col);
+        int start_row();
+        int start_col();
+        int end_row();
+        int end_col();
+
+    private:
+        short encoding;
+};
+#endif
