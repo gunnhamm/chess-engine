@@ -1,33 +1,13 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include "pieces.hpp"
 #include <vector>
 #include <memory>
 #include <iostream>
 
-const int black = -2;
-const int null = 0;
-const int blank = 1;
-const int white = 2;
-
-const int pawn = 4;
-const int rook = 5;
-const int knight = 6;
-const int bishop = 7;
-const int queen = 8;
-const int king = 9;
-
-const int board_start = 2;
-const int board_end = 10;
-
 class Board {
     public:
-        inline void pawn_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
-        inline void rook_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
-        inline void knight_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
-        inline void bishop_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
-        inline void queen_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
-        inline void king_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
         void flip();
         void print_board();
 
@@ -75,11 +55,7 @@ class Move {
     private:
         short encoding;
 };
-struct Moveset {
-    int num_moves;
-    int x_moves[];
-    int y_moves[];
-}
+
 
 
 
