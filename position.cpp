@@ -58,7 +58,7 @@ void Position::pawn_moves(std::shared_ptr<std::vector<Move>> move_list, int row,
     if (capture_left == black || (capture_left == blank && en_passant_left)) {
         move_list->push_back(Move(row, col, row - 1, col - 1));
     }
-    if (capture_right = black || capture_left == blank && en_passant_right) {
+    if (capture_right == black || capture_left == blank && en_passant_right) {
         move_list->push_back(Move(row, col, row - 1, col + 1));
     }
 }

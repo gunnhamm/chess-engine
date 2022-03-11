@@ -54,9 +54,3 @@ int Move::start_row() {
 Move::Move(int start_row, int start_col, int end_row, int end_col) {
     encoding = 0 | start_row << 9 | start_col << 6 | end_row << 3 | end_col;
 }
-
-int main() {
-    Board b;
-    b.print_board();
-    return 0;
-}
