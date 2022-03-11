@@ -1,6 +1,10 @@
 #include "position.hpp"
 
-
+Position::Position():
+score(0), wk_castle(false), wq_castle(false), bk_castle(false), bq_castle(false), en_passant_col(-1), king_passant(false)
+{
+    board=std::unique_ptr<Board>(new Board());
+}
 
 std::shared_ptr<std::vector<Move>> Position::gen_moves(int row, int col) {
     std::shared_ptr<std::vector<Move>> move_list(new std::vector<Move>());
@@ -17,7 +21,6 @@ std::shared_ptr<std::vector<Move>> Position::gen_moves(int row, int col) {
                     default:
                         sliding_moves(move_list, i, j);
                 }
-                return move_list; 
             }
         }
     }
@@ -39,6 +42,9 @@ void Position::sliding_moves(std::shared_ptr<std::vector<Move>> move_list, int r
             if (board->pieces[row + y_distance][col + x_distance] == black) {
                 break;
             }
+            x_distance += x_moves[i];
+            y_distance += y_moves[i];
+
         }
     }
 
