@@ -38,36 +38,6 @@ void Board::flip() {
         }
     }
 }
-shared_ptr<vector<Move>> Board::gen_moves(int row, int col) {
-    shared_ptr<vector<Move>> moves(new vector<Move>());
-    for (int i = row; i < board_end; ++i) {
-        for (int j = col; j < board_end; ++j) {
-            if (colors[i][j] == white) {
-                switch (pieces[i][j]) {
-                    case pawn:
-                        pawn_moves(moves, i, j);
-                        break;
-                    case rook:
-                        rook_moves(moves, i, j);
-                        break;
-                    case knight:
-                        knight_moves(moves, i, j);
-                        break;
-                    case bishop:
-                        bishop_moves(moves, i, j);
-                        break;
-                    case queen:
-                        queen_moves(moves, i, j);
-                        break;
-                    case king:
-                        king_moves(moves, i, j);
-
-                }
-            }
-            return moves;
-        }
-    }
-}
 
 int Move::end_col() {
     return (encoding & 0x0007);

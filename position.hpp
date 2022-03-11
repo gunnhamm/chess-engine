@@ -1,5 +1,5 @@
 #include "board.hpp"
-
+#include "pieces.hpp"
 class Position {
     public:
         std::shared_ptr<std::vector<Move>> gen_moves(int row, int col);

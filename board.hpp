@@ -11,8 +11,6 @@ class Board {
         void flip();
         void print_board();
 
-
-    private:
         int colors[12][12] = {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
