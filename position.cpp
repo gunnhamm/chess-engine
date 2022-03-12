@@ -85,3 +85,7 @@ void Position::knight_moves(std::shared_ptr<std::vector<Move>> move_list, int ro
 void Position::king_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col) {
     
 }
+
+void Position::print() {
+    board->print_board();
+}

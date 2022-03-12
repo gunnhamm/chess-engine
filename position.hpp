@@ -8,7 +8,7 @@ class Position {
         void knight_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
         void king_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
         Position();
-
+        void print();
 
 
         

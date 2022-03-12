@@ -8,5 +8,6 @@ int main(int argc, char** argv) {
     for (auto it = list->begin(); it != list->end(); it++) {
         cout << *it << endl;
     }
+    p.print();
     return 0;
 }
