@@ -11,6 +11,8 @@ class Board {
         void flip();
         void print_board();
         Board();
+        void put(int piece, int color, int row, int col);
+        void clear();
         char colors[12][12]; /*= {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},

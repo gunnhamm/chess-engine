@@ -80,6 +80,18 @@ void Board::flip() {
         }
     }
 }
+void Board::put(int piece, int color, int row, int col) {
+    pieces[row + 2][col + 2] = piece;
+    colors[row + 2][col + 2] = color;
+}
+void Board::clear() {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            put(blank, blank, i, j);
+        }
+    }
+}
+
 
 int Move::end_col() {
     return (encoding & 0x0007);

@@ -1,7 +1,7 @@
 #include "position.hpp"
 using namespace std;
 Position::Position():
-score(0), wk_castle(true), wq_castle(true), bk_castle(true), bq_castle(true), en_passant_col(-1), king_passant(false)
+score(0), wk_castle(true), double_move_row(8), wq_castle(true), bk_castle(true), bq_castle(true), en_passant_col(-1), king_passant(false) 
 {
     board=unique_ptr<Board>(new Board());
 }
@@ -42,7 +42,7 @@ void Position::sliding_moves(shared_ptr<vector<Move>> move_list, int row, int co
         y_distance = y_moves[i];
         while (board->colors[row + y_distance][col + x_distance] != null && board->colors[row + y_distance][col + x_distance] != white) {
             move_list->push_back(Move(row, col, row + y_distance, col + x_distance));
-            if (board->pieces[row + y_distance][col + x_distance] == black) {
+            if (board->colors[row + y_distance][col + x_distance] == black) {
                 break;
             }
             x_distance += x_moves[i];
@@ -55,12 +55,12 @@ void Position::sliding_moves(shared_ptr<vector<Move>> move_list, int row, int co
 void Position::pawn_moves(shared_ptr<vector<Move>> move_list, int row, int col) {
     if (board->pieces[row - 1][col] == blank) {
         move_list->push_back(Move(row, col, row - 1, col));
-        if (board->pieces[row - 2][col] == blank) {
+        if (board->pieces[row - 2][col] == blank && row == double_move_row) {
             move_list->push_back(Move(row, col, row - 2, col));
         }
     }
-    int capture_left = board->pieces[row - 1][col - 1];
-    int capture_right = board->pieces[row - 1][col + 1];
+    int capture_left = board->colors[row - 1][col - 1];
+    int capture_right = board->colors[row - 1][col + 1];
     bool en_passant_right = en_passant_col == col + 1;
     bool en_passant_left = en_passant_col == col - 1;
 

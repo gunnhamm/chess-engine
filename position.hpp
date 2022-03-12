@@ -11,10 +11,10 @@ class Position {
         void print();
         void make_move(Move m);                                  
         bool legal_move(Move m);
+        std::unique_ptr<Board> board;
 
         
     private:
-        std::unique_ptr<Board> board;
         int score;
 
         bool wk_castle;
@@ -26,4 +26,5 @@ class Position {
         int en_passant_col;
 
         bool king_passant;
+        int double_move_row;
 };
