@@ -35,7 +35,7 @@ const int pawn_ymoves[] = {1, 2, 1, 1};
 const int rook_xmoves[] = {1, -1, 0, 0};
 const int rook_ymoves[] = {0, 0, 1, -1}; 
 
-const int knight_xmoves[] = {2, -2, 1, -1, -2, -2, -1, -1};
+const int knight_xmoves[] = {2, -2, 1, -1, -2, -2, 1, -1};
 const int knight_ymoves[] = {1, 1, 2, 2, -1, -1, -2, -2};
 
 const int bishop_xmoves[] = {1, 1, -1, -1};

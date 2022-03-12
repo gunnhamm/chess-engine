@@ -1,7 +1,7 @@
 #include "position.hpp"
 using namespace std;
 Position::Position():
-score(0), wk_castle(false), wq_castle(false), bk_castle(false), bq_castle(false), en_passant_col(-1), king_passant(false)
+score(0), wk_castle(true), wq_castle(true), bk_castle(true), bq_castle(true), en_passant_col(-1), king_passant(false)
 {
     board=unique_ptr<Board>(new Board());
 }
@@ -86,8 +86,36 @@ void Position::knight_moves(shared_ptr<vector<Move>> move_list, int row, int col
     }
 }
 void Position::king_moves(shared_ptr<vector<Move>> move_list, int row, int col) {
-    
+    Moveset king_moves = movesets.at(king);
+    const int* x_moves = king_moves.x_moves;
+    const int* y_moves = king_moves.y_moves;
+
+    for (int i = 0; i < 8; i++) {
+        int move_x = col + x_moves[i];
+        int move_y = row + y_moves[i];
+
+        if (board->colors[move_y][move_x] == black || board->colors[move_y][move_x] == blank) {
+            move_list->push_back(Move(row, col, move_y, move_x));
+        }
+    }
+    if (wk_castle) {
+        if (board->pieces[row][col + 1] == blank && board->pieces[row][col + 2] == blank) {
+            move_list->push_back(Move(row, col, row, col + 3));
+        }
+    }
+    if (wq_castle) {
+        if (board->pieces[row][col - 1] == blank && board->pieces[row][col - 2] == blank && board->pieces[row][col - 3]) {
+            move_list->push_back(Move(row, col, row, col - 4));
+        }
+    }
 }
+bool Position::legal_move(Move m) {
+
+}                               
+
+void Position::make_move(Move m) {
+
+}                               
 
 void Position::print() {
     board->print_board();

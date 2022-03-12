@@ -9,7 +9,8 @@ class Position {
         void king_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col);
         Position();
         void print();
-
+        void make_move(Move m);                                  
+        bool legal_move(Move m);
 
         
     private:
