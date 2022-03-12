@@ -38,7 +38,7 @@ Board::Board():
 
 void Board::print_board() {
     for (int i = board_start; i < board_end; ++i) {
-        std::cout << 10 - i << " ";
+        cout << 10 - i << " ";
         for (int j = board_start; j < board_end; ++j) {
             char piece = '-';
             switch (pieces[i][j]) {
@@ -67,9 +67,9 @@ void Board::print_board() {
         }
         cout << endl;
     }
-    std::cout << "  ";
+    cout << "  ";
     for (char c = 'a'; c <= 'h'; c++) {
-        std::cout <<  c << " ";
+        cout <<  c << " ";
     }
     cout << endl;
 }
@@ -101,7 +101,7 @@ Move::Move(int start_row, int start_col, int end_row, int end_col) {
 
     encoding = 0 | start_row << 9 | start_col << 6 | end_row << 3 | end_col;
 }
-std::ostream &operator<<(std::ostream &os, Move m) {
+ostream &operator<<(ostream &os, Move m) {
     os << char(m.start_col() + 'a') << 8 - m.start_row() << char(m.end_col() + 'a') << 8 - m.end_row();
     return os;
 }

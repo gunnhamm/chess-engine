@@ -1,23 +1,26 @@
 #include "position.hpp"
-
+using namespace std;
 Position::Position():
 score(0), wk_castle(false), wq_castle(false), bk_castle(false), bq_castle(false), en_passant_col(-1), king_passant(false)
 {
-    board=std::unique_ptr<Board>(new Board());
+    board=unique_ptr<Board>(new Board());
 }
 
-std::shared_ptr<std::vector<Move>> Position::gen_moves(int row, int col) {
-    std::shared_ptr<std::vector<Move>> move_list(new std::vector<Move>());
+shared_ptr<vector<Move>> Position::gen_moves(int row, int col) {
+    shared_ptr<vector<Move>> move_list(new vector<Move>());
     for (int i = row; i < board_end; ++i) {
         for (int j = col; j < board_end; ++j) {
             if (board->colors[i][j] == white) {
                 switch (board->pieces[i][j]) {
                     case pawn:
                         pawn_moves(move_list, i, j);
+                        break;
                     case knight:
                         knight_moves(move_list, i, j);
+                        break;
                     case king:
                         king_moves(move_list, i, j);
+                        break;
                     default:
                         sliding_moves(move_list, i, j);
                 }
@@ -27,7 +30,7 @@ std::shared_ptr<std::vector<Move>> Position::gen_moves(int row, int col) {
     return move_list; 
 }
 
-void Position::sliding_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col) {
+void Position::sliding_moves(shared_ptr<vector<Move>> move_list, int row, int col) {
     const int piece_type = board->pieces[row][col];
     Moveset possible_moves = movesets.at(piece_type);
     int x_distance, y_distance;
@@ -49,7 +52,7 @@ void Position::sliding_moves(std::shared_ptr<std::vector<Move>> move_list, int r
     }
 
 }
-void Position::pawn_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col) {
+void Position::pawn_moves(shared_ptr<vector<Move>> move_list, int row, int col) {
     if (board->pieces[row - 1][col] == blank) {
         move_list->push_back(Move(row, col, row - 1, col));
         if (board->pieces[row - 2][col] == blank) {
@@ -68,7 +71,7 @@ void Position::pawn_moves(std::shared_ptr<std::vector<Move>> move_list, int row,
         move_list->push_back(Move(row, col, row - 1, col + 1));
     }
 }
-void Position::knight_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col) {
+void Position::knight_moves(shared_ptr<vector<Move>> move_list, int row, int col) {
     Moveset knight_moves = movesets.at(knight);
     const int* x_moves = knight_moves.x_moves;
     const int* y_moves = knight_moves.y_moves;
@@ -82,7 +85,7 @@ void Position::knight_moves(std::shared_ptr<std::vector<Move>> move_list, int ro
         }
     }
 }
-void Position::king_moves(std::shared_ptr<std::vector<Move>> move_list, int row, int col) {
+void Position::king_moves(shared_ptr<vector<Move>> move_list, int row, int col) {
     
 }
 
